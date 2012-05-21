@@ -34,12 +34,10 @@ eos
     return nil unless initWithFragmentShaderFromString(kGPUImagePolarPixellatePosterizeFragmentShaderString)
 
     #
-    # The following code thrown a runtime exception, see README.md for details:
+    # The following code throws a runtime exception, see README.md for details:
     #
     # @pixelSizeUniform = self.filterProgram.uniformIndex("pixelSize")
     # @centerUniform = self.filterProgram.uniformIndex("center")
-    #
-    # For the following to work, the GPUImage Objective-C source code needs to be patched
     #
     @pixelSizeUniform = self.filterProgram.uniformIndex2("pixelSize").unsignedIntValue
     @centerUniform = self.filterProgram.uniformIndex2("center").unsignedIntValue
