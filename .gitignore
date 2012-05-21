@@ -8,3 +8,4 @@ vendor/.DS_Store
 vendor/GPUImage/.DS_Store
 vendor/GPUImage/build-iPhoneOS/libGPUImage.a
 vendor/GPUImage/build-iPhoneSimulator/libGPUImage.a
+vendor/GPUImage/GPUImage.xcodeproj/xcuserdata
