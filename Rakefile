@@ -24,7 +24,7 @@ end
 
 desc "Apply Patches: GPUImage"
 task :patch do
-  sh "patch -p1 < GPUImage_patch.diff"
+  sh "patch --no-backup-if-mismatch -p1 < GPUImage_patch.diff"
   cd "vendor/GPUImage" do
     sh "git checkout -b RubyMotion"
     sh "git add -u"
