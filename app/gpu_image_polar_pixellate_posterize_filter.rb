@@ -45,7 +45,7 @@ eos
     @pixelSizeData = FloatData.new([0.0,0.0])
     @centerData = FloatData.new([0.0,0.0])
 
-    self.pixelSize = CGSizeMake(0.05, 0.05)
+    self.pixelSize = CGSizeMake(0.03, 0.03)
     self.center = CGPointMake(0.5, 0.5)
 
     self
