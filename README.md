@@ -1,4 +1,4 @@
-# A GPUImage Ruby Motion Example
+# A GPUImage RubyMotion Example
 
 An example to demonstrate the use of [GPUImage][GI] with [RubyMotion][RM]. This is based on the example from the Indie Ambitions blog article [Learning OpenGL with GPUImage][IA].
 
