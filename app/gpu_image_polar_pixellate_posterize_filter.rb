@@ -33,32 +33,14 @@ class GPUImagePolarPixellatePosterizeFilter < GPUImageFilter
 eos
     return nil unless initWithFragmentShaderFromString(kGPUImagePolarPixellatePosterizeFragmentShaderString)
 
-    # The following code thrown a runtime exception, see below for details and workaround:
+    #
+    # The following code thrown a runtime exception, see README.md for details:
     #
     # @pixelSizeUniform = self.filterProgram.uniformIndex("pixelSize")
     # @centerUniform = self.filterProgram.uniformIndex("center")
     #
-
-    # 2 workarounds are needed and require patching the GPUImage Objective-C library
-    # to use self.filterProgram and self.filterProgram.uniformIndex
+    # For the following to work, the GPUImage Objective-C source code needs to be patched
     #
-    # 1. "filterProgram" is a protected instance variable of GPUImageFilter. Both the ruby syntax
-    #    @filterProgram and self.filterProgram return nil when using the vanilla GPUImage libray.
-    #    GPUImageFilter.{h,m} had to be modified to expose a public getter method "filterProgram"
-    #
-    #    GPUImageFilter.h:
-    #    - (GLProgram *)filterProgram; // RubyMotion workaround
-    #
-    # 2. "uniformIndex" defined in GLProgram.h should work as is, but throws a run-time exception:
-    #    GLProgram.h:
-    #    - (GLuint)uniformIndex:(NSString *)uniformName;
-    #    Exception: Objective-C stub for message `uniformIndex:' type `I@:@' not precompiled. Make sure you properly link with the framework or library that defines this message
-    #
-    #    GLProgram.{h,m} had to be modified to insert a method called uniformIndex2 which returned
-    #    type NSNumber* instead of GLuint:
-    #    GLProgram.h:
-    #    - (NSNumber *)uniformIndex2:(NSString *)uniformName; // RubyMotion workaround
-
     @pixelSizeUniform = self.filterProgram.uniformIndex2("pixelSize").unsignedIntValue
     @centerUniform = self.filterProgram.uniformIndex2("center").unsignedIntValue
 
