@@ -18,7 +18,7 @@ Motion::Project::App.setup do |app|
 end
 
 desc "Clean the vendor build folder"
-task :vendorclean do
+task :vendorclean => [:clean] do
   sh "rm", "-rf", "vendor/build"
 end
 
