@@ -1,6 +1,8 @@
 
 An example to demonstrate the use of [GI][GPUImage] with [RubyMotion][RM]. This is based on the example from the Indie Ambitions blog article [Learning OpenGL with GPUImage][IA].
 
+This needs to be run on a physical iPhone device with a camera to see the results. Running it in the simulator simply results in a black screen. [VI][This video] shows the effect of the image filter. See the blog article for more details.
+
 Caveats:
 It seems that with the latest version of RubyMotion available at this time (v1.4), at least 2 small patches need to be applied to the GPUImage Objective-C sources to make the example work. This repository includes the patched GPUImage sources under vendor/GPUImage and the patch file is also included (GPUImage_patch.diff).
 
@@ -37,3 +39,4 @@ The original Objective-C code was:
 [GI]: https://github.com/BradLarson/GPUImage
 [RM]: http://www.rubymotion.com/
 [IA]: http://indieambitions.com/idevblogaday/learning-opengl-gpuimage/
+[VI]: http://www.youtube.com/watch?v=cThYM20wj_M
