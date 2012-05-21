@@ -1,7 +1,7 @@
 class JGViewController < UIViewController
-	def viewDidLoad
-		super
-		@vc = GPUImageVideoCamera.alloc.initWithSessionPreset(AVCaptureSessionPreset640x480, cameraPosition:AVCaptureDevicePositionBack)
+  def viewDidLoad
+    super
+    @vc = GPUImageVideoCamera.alloc.initWithSessionPreset(AVCaptureSessionPreset640x480, cameraPosition:AVCaptureDevicePositionBack)
     @rf = GPUImageRotationFilter.alloc.initWithRotation(KGPUImageRotateRight)
     @ppf = GPUImagePolarPixellatePosterizeFilter.alloc.init
     @vc.addTarget(@rf)
@@ -10,7 +10,7 @@ class JGViewController < UIViewController
     @ppf.addTarget(v)
     self.view = v
     @vc.startCameraCapture
-	end
+  end
 
   def touchesBegan(touches, withEvent:event)
     location = touches.anyObject.locationInView(self.view)
