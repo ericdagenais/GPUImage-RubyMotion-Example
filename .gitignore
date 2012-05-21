@@ -6,3 +6,5 @@ resources/*.storyboardc
 .DS_Store
 vendor/.DS_Store
 vendor/GPUImage/.DS_Store
+vendor/GPUImage/build-iPhoneOS/libGPUImage.a
+vendor/GPUImage/build-iPhoneSimulator/libGPUImage.a
