@@ -87,4 +87,7 @@ typedef struct GPUMatrix3x3 GPUMatrix3x3;
 - (void)setFloatVec4:(GLfloat *)newVec4 forUniform:(NSString *)uniformName;
 - (void)setFloatArray:(GLfloat *)array length:(GLsizei)count forUniform:(NSString*)uniformName;
 
+// Accessors
+- (GLProgram *)filterProgram; // RubyMotion workaround
+
 @end

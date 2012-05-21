@@ -148,6 +148,11 @@ typedef void (*GLLogFunction) (GLuint program,
 {
     return glGetUniformLocation(program, [uniformName UTF8String]);
 }
+// Ruby motion workaround
+- (NSNumber *)uniformIndex2:(NSString *)uniformName
+{
+    return [NSNumber numberWithUnsignedInt:glGetUniformLocation(program, [uniformName UTF8String])];
+}
 // END:indexmethods
 #pragma mark -
 // START:link

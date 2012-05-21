@@ -24,6 +24,7 @@
 - (void)addAttribute:(NSString *)attributeName;
 - (GLuint)attributeIndex:(NSString *)attributeName;
 - (GLuint)uniformIndex:(NSString *)uniformName;
+- (NSNumber *)uniformIndex2:(NSString *)uniformName; // RubyMotion workaround
 - (BOOL)link;
 - (void)use;
 - (NSString *)vertexShaderLog;
