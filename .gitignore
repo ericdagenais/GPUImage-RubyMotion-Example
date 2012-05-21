@@ -3,3 +3,6 @@ build
 resources/*.nib
 resources/*.momd
 resources/*.storyboardc
+.DS_Store
+vendor/.DS_Store
+vendor/GPUImage/.DS_Store
