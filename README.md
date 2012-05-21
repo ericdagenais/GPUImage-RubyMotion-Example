@@ -8,7 +8,7 @@ This needs to be run on a physical iPhone device with a camera to see the result
 
 It seems that with the latest version of RubyMotion available at this time (v1.4), at least 2 small patches need to be applied to the GPUImage Objective-C sources to make the example work. This repository includes the patched GPUImage sources under vendor/GPUImage and the patch file is also included (GPUImage_patch.diff).
 
-The following code in gpu_image_polar_pixellate_posterize_filter.rb thrown a runtime exception, see below for details and workaround:
+The following code in gpu_image_polar_pixellate_posterize_filter.rb throws a runtime exception, see below for details and workaround:
 
         @pixelSizeUniform = self.filterProgram.uniformIndex("pixelSize")
         @centerUniform = self.filterProgram.uniformIndex("center")
