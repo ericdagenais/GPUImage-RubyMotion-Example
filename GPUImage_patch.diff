@@ -4,16 +4,16 @@ Date: Mon, 21 May 2012 00:22:31 -0700
 Subject: [PATCH] -patch GPUImage with RubyMotion workarounds
 
 ---
- vendor/GPUImage/Source/GLProgram.h      |    1 +
- vendor/GPUImage/Source/GLProgram.m      |    5 +++++
- vendor/GPUImage/Source/GPUImageFilter.h |    3 +++
- vendor/GPUImage/Source/GPUImageFilter.m |    6 ++++++
+ vendor/GPUImage/framework/Source/GLProgram.h      |    1 +
+ vendor/GPUImage/framework/Source/GLProgram.m      |    5 +++++
+ vendor/GPUImage/framework/Source/GPUImageFilter.h |    3 +++
+ vendor/GPUImage/framework/Source/GPUImageFilter.m |    6 ++++++
  4 files changed, 15 insertions(+), 0 deletions(-)
 
-diff --git a/vendor/GPUImage/Source/GLProgram.h b/vendor/GPUImage/Source/GLProgram.h
+diff --git a/vendor/GPUImage/framework/Source/GLProgram.h b/vendor/GPUImage/framework/Source/GLProgram.h
 index 81a1a8d..c97f7bb 100755
---- a/vendor/GPUImage/Source/GLProgram.h
-+++ b/vendor/GPUImage/Source/GLProgram.h
+--- a/vendor/GPUImage/framework/Source/GLProgram.h
++++ b/vendor/GPUImage/framework/Source/GLProgram.h
 @@ -24,6 +24,7 @@
  - (void)addAttribute:(NSString *)attributeName;
  - (GLuint)attributeIndex:(NSString *)attributeName;
@@ -22,10 +22,10 @@ index 81a1a8d..c97f7bb 100755
  - (BOOL)link;
  - (void)use;
  - (NSString *)vertexShaderLog;
-diff --git a/vendor/GPUImage/Source/GLProgram.m b/vendor/GPUImage/Source/GLProgram.m
+diff --git a/vendor/GPUImage/framework/Source/GLProgram.m b/vendor/GPUImage/framework/Source/GLProgram.m
 index 4f4a2ff..0379d32 100755
---- a/vendor/GPUImage/Source/GLProgram.m
-+++ b/vendor/GPUImage/Source/GLProgram.m
+--- a/vendor/GPUImage/framework/Source/GLProgram.m
++++ b/vendor/GPUImage/framework/Source/GLProgram.m
 @@ -148,6 +148,11 @@ typedef void (*GLLogFunction) (GLuint program,
  {
      return glGetUniformLocation(program, [uniformName UTF8String]);
@@ -38,10 +38,10 @@ index 4f4a2ff..0379d32 100755
  // END:indexmethods
  #pragma mark -
  // START:link
-diff --git a/vendor/GPUImage/Source/GPUImageFilter.h b/vendor/GPUImage/Source/GPUImageFilter.h
+diff --git a/vendor/GPUImage/framework/Source/GPUImageFilter.h b/vendor/GPUImage/framework/Source/GPUImageFilter.h
 index a825509..e895c23 100755
---- a/vendor/GPUImage/Source/GPUImageFilter.h
-+++ b/vendor/GPUImage/Source/GPUImageFilter.h
+--- a/vendor/GPUImage/framework/Source/GPUImageFilter.h
++++ b/vendor/GPUImage/framework/Source/GPUImageFilter.h
 @@ -87,4 +87,7 @@ typedef struct GPUMatrix3x3 GPUMatrix3x3;
  - (void)setFloatVec4:(GLfloat *)newVec4 forUniform:(NSString *)uniformName;
  - (void)setFloatArray:(GLfloat *)array length:(GLsizei)count forUniform:(NSString*)uniformName;
@@ -51,10 +51,10 @@ index a825509..e895c23 100755
 +
  @end
 \ No newline at end of file
-diff --git a/vendor/GPUImage/Source/GPUImageFilter.m b/vendor/GPUImage/Source/GPUImageFilter.m
+diff --git a/vendor/GPUImage/framework/Source/GPUImageFilter.m b/vendor/GPUImage/framework/Source/GPUImageFilter.m
 index 4d65275..d02810b 100755
---- a/vendor/GPUImage/Source/GPUImageFilter.m
-+++ b/vendor/GPUImage/Source/GPUImageFilter.m
+--- a/vendor/GPUImage/framework/Source/GPUImageFilter.m
++++ b/vendor/GPUImage/framework/Source/GPUImageFilter.m
 @@ -599,4 +599,10 @@ void dataProviderUnlockCallback (void *info, const void *data, size_t size)
  #pragma mark -
  #pragma mark Accessors
