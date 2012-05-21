@@ -2,10 +2,9 @@ class JGViewController < UIViewController
   def viewDidLoad
     super
     @vc = GPUImageVideoCamera.alloc.initWithSessionPreset(AVCaptureSessionPreset640x480, cameraPosition:AVCaptureDevicePositionBack)
-    @rf = GPUImageRotationFilter.alloc.initWithRotation(KGPUImageRotateRight)
+    @vc.outputImageOrientation = UIInterfaceOrientationPortrait
     @ppf = GPUImagePolarPixellatePosterizeFilter.alloc.init
-    @vc.addTarget(@rf)
-    @rf.addTarget(@ppf)
+    @vc.addTarget(@ppf)
     v = GPUImageView.alloc.init
     @ppf.addTarget(v)
     self.view = v
