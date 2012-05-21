@@ -4,6 +4,15 @@ An example to demonstrate the use of [GPUImage][GI] with [RubyMotion][RM]. This 
 
 This needs to be run on a physical iPhone device with a camera to see the results. Running it in the simulator simply results in a black screen. [This video][VI] shows the effect of the image filter. See the blog article for more details.
 
+### Quickstart
+
+        [[git clone https://ericdagenais@github.com/ericdagenais/GPUImage-RubyMotion-Example.git]]
+        cd GPUImage-RubyMotion-Example
+        rake patch     # apply patch to vendor/GPUimage git submodule
+        rake           # build and run in simulator to check for errors/exceptions
+        vim Rakefile   # edit app.codesign_certificate
+        rake device    # deploy to iPhone/iPad
+
 ### Caveats
 
 It seems that with the latest version of RubyMotion available at this time (v1.4), at least 2 small patches need to be applied to the GPUImage Objective-C sources to make the example work. This repository includes the patched GPUImage sources under vendor/GPUImage and the patch file is also included (GPUImage_patch.diff).
