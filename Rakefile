@@ -25,4 +25,9 @@ end
 desc "Apply Patches: GPUImage"
 task :patch do
   sh "patch -p1 < GPUImage_patch.diff"
+  cd "vendor/GPUImage" do
+    sh "git checkout -b RubyMotion"
+    sh "git add -u"
+    sh "git commit -m 'RubyMotion patch'"
+  end
 end
