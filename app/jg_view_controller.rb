@@ -2,16 +2,21 @@ class JGViewController < UIViewController
   def loadView
     @v = GPUImageView.alloc.init
     self.view = @v
-    #@mode = :ppf
-    #@mode = :perlin
-    @mode = :crazy
+    @modes = [:ppf, :perlin, :crazy]
+    @mode = 2
   end
 
   def viewDidLoad
     super
     @camera = GPUImageVideoCamera.alloc.initWithSessionPreset(AVCaptureSessionPreset640x480, cameraPosition:AVCaptureDevicePositionBack)
     @camera.outputImageOrientation = UIInterfaceOrientationPortrait
-    case @mode
+    setupFilters
+    @filter.addTarget(@v)
+    @camera.startCameraCapture
+  end
+
+  def setupFilters
+    case @modes[@mode]
     when :ppf
       @filter = GPUImagePolarPixellatePosterizeFilter.alloc.init
       @camera.addTarget(@filter)
@@ -26,8 +31,6 @@ class JGViewController < UIViewController
       @filter = GPUImagePixellateCrazyFilter.alloc.init
       @camera.addTarget(@filter)
     end
-    @filter.addTarget(@v)
-    @camera.startCameraCapture
   end
 
   def touchesBegan(touches, withEvent:event)
@@ -40,7 +43,7 @@ class JGViewController < UIViewController
 
   def handleTouch(touches)
     location = touches.anyObject.locationInView(self.view)
-    case @mode
+    case @modes[@mode]
     when :ppf
       @filter.pixelSize = CGSizeMake(location.x / self.view.bounds.size.width * 0.5, location.y / self.view.bounds.size.height * 0.5)
     when :crazy
