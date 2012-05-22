@@ -4,6 +4,8 @@ class JGViewController < UIViewController
     self.view = @v
     @modes = [:ppf, :perlin, :crazy]
     @mode = 2
+    @swipeRecognizer = UISwipeGestureRecognizer.new.initWithTarget(self, action:'handleSwipeFrom:')
+    @swipeRecognizer.direction = UISwipeGestureRecognizerDirectionLeft | UISwipeGestureRecognizerDirectionRight
   end
 
   def viewDidLoad
@@ -13,6 +15,7 @@ class JGViewController < UIViewController
     setupFilters
     @filter.addTarget(@v)
     @camera.startCameraCapture
+    self.view.addGestureRecognizer(@swipeRecognizer)
   end
 
   def setupFilters
@@ -31,6 +34,10 @@ class JGViewController < UIViewController
       @filter = GPUImagePixellateCrazyFilter.alloc.init
       @camera.addTarget(@filter)
     end
+  end
+
+  def handleSwipeFrom(recognizer)
+    NSLog("swipe")
   end
 
   def touchesBegan(touches, withEvent:event)
