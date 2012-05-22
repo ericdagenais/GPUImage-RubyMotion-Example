@@ -3,7 +3,7 @@ class JGViewController < UIViewController
     @v = GPUImageView.alloc.init
     self.view = @v
     @modes = [:ppf, :perlin, :crazy]
-    @mode = 1
+    @mode = 0
     @swipeLeftRecognizer = UISwipeGestureRecognizer.new.initWithTarget(self, action:'handleLeftSwipeFrom:')
     @swipeLeftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft
     @swipeRightRecognizer = UISwipeGestureRecognizer.new.initWithTarget(self, action:'handleRightSwipeFrom:')
@@ -23,18 +23,27 @@ class JGViewController < UIViewController
   def setupFilters
     case @modes[@mode]
     when :ppf
-      @filter = GPUImagePolarPixellatePosterizeFilter.alloc.init
-      @camera.addTarget(@filter)
+      if @ppf.nil?
+        @ppf = GPUImagePolarPixellatePosterizeFilter.alloc.init
+        @camera.addTarget(@ppf)
+      end
+      @filter = @ppf
     when :perlin
-      @filter = GPUImageAlphaBlendFilter.alloc.init
-      @perlin = GPUImagePerlinNoiseFilter.alloc.init
-      @camera.addTarget(@filter)
-      @camera.addTarget(@perlin)
-      @perlin.addTarget(@filter)
-      @filter.mix = 0.5
+      if @blend.nil?
+        @blend = GPUImageAlphaBlendFilter.alloc.init
+        @perlin = GPUImagePerlinNoiseFilter.alloc.init
+        @camera.addTarget(@blend)
+        @camera.addTarget(@perlin)
+        @perlin.addTarget(@blend)
+        @blend.mix = 0.5
+      end
+      @filter = @blend
     when :crazy
-      @filter = GPUImagePixellateCrazyFilter.alloc.init
-      @camera.addTarget(@filter)
+      if @crazy.nil?
+        @crazy = GPUImagePixellateCrazyFilter.alloc.init
+        @camera.addTarget(@crazy)
+      end
+      @filter = @crazy
     else
       NSLog("Invalid filter")
     end
@@ -42,23 +51,18 @@ class JGViewController < UIViewController
   end
 
   def tearDown
-    @perlin.removeAllTargets unless @perlin.nil?
-    @camera.removeAllTargets
     @filter.removeAllTargets
-    @perlin = nil
   end
 
   def handleLeftSwipeFrom(recognizer)
-    @mode = (@mode += 1) % @modes.count
-    NSLog("leftSwipe, mode = %@", @mode)
     tearDown
+    @mode = (@mode += 1) % @modes.count
     setupFilters
   end
 
   def handleRightSwipeFrom(recognizer)
-    @mode = (@mode > 0) ? (@mode -= 1) : (@modes.count-1)
-    NSLog("rightSwipe, mode %@", @mode)
     tearDown
+    @mode = (@mode > 0) ? (@mode -= 1) : (@modes.count-1)
     setupFilters
   end
 
