@@ -21,13 +21,3 @@ desc "Clean the vendor build folder"
 task :vendorclean => [:clean] do
   sh "rm", "-rf", "vendor/build"
 end
-
-desc "Apply Patches: GPUImage"
-task :patch do
-  sh "patch --no-backup-if-mismatch -p1 < GPUImage_patch.diff"
-  cd "vendor/GPUImage" do
-    sh "git checkout -b RubyMotion"
-    sh "git add -u"
-    sh "git commit -m 'RubyMotion patch'"
-  end
-end

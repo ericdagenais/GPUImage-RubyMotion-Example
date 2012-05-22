@@ -9,7 +9,6 @@ This needs to be run on a physical iPhone or iPad device with a camera to see th
         git clone https://github.com/ericdagenais/GPUImage-RubyMotion-Example.git
         cd GPUImage-RubyMotion-Example
         git submodule update  # fetch vendor/GPUImage submodule
-        rake patch            # apply patch to vendor/GPUImage git submodule
         rake                  # build and run in simulator to check for errors/exceptions
         vim Rakefile          # edit app.codesign_certificate
         rake device           # deploy to iPhone/iPad
@@ -21,7 +20,7 @@ This needs to be run on a physical iPhone or iPad device with a camera to see th
 
 ### Caveats
 
-It seems that with the latest version of RubyMotion available at this time (v1.5), 2 small modifications need to be made to the GPUImage Objective-C sources to make the example work. The patch file is included (GPUImage_patch.diff) and can be applied with the "rake patch" task in the above instructions
+It seems that with the latest version of RubyMotion available at this time (v1.5), 2 small modifications need to be made to the GPUImage Objective-C sources to make the example work. The patch file is included (GPUImage_patch.diff).
 
 #### RubyMotion v1.5 Limitations
 
