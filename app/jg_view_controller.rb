@@ -2,39 +2,48 @@ class JGViewController < UIViewController
   def loadView
     @v = GPUImageView.alloc.init
     self.view = @v
-    @mode = :ppf
+    #@mode = :ppf
     #@mode = :perlin
+    @mode = :crazy
   end
 
   def viewDidLoad
     super
-    @vc = GPUImageVideoCamera.alloc.initWithSessionPreset(AVCaptureSessionPreset640x480, cameraPosition:AVCaptureDevicePositionBack)
-    @vc.outputImageOrientation = UIInterfaceOrientationPortrait
+    @camera = GPUImageVideoCamera.alloc.initWithSessionPreset(AVCaptureSessionPreset640x480, cameraPosition:AVCaptureDevicePositionBack)
+    @camera.outputImageOrientation = UIInterfaceOrientationPortrait
     case @mode
     when :ppf
-      @ppf = GPUImagePolarPixellatePosterizeFilter.alloc.init
-      @vc.addTarget(@ppf)
-      @ppf.addTarget(@v)
+      @filter = GPUImagePolarPixellatePosterizeFilter.alloc.init
+      @camera.addTarget(@filter)
     when :perlin
-      @bf = GPUImageAlphaBlendFilter.alloc.init
-      @pn = GPUImagePerlinNoiseFilter.alloc.init
-      @vc.addTarget(@bf)
-      @vc.addTarget(@pn)
-      @pn.addTarget(@bf)
-      @bf.mix = 0.5
-      @bf.addTarget(@v)
+      @filter = GPUImageAlphaBlendFilter.alloc.init
+      @perlin = GPUImagePerlinNoiseFilter.alloc.init
+      @camera.addTarget(@filter)
+      @camera.addTarget(@perlin)
+      @perlin.addTarget(@filter)
+      @filter.mix = 0.5
+    when :crazy
+      @filter = GPUImagePixellateCrazyFilter.alloc.init
+      @camera.addTarget(@filter)
     end
-    @vc.startCameraCapture
+    @filter.addTarget(@v)
+    @camera.startCameraCapture
   end
 
   def touchesBegan(touches, withEvent:event)
     location = touches.anyObject.locationInView(self.view)
-    @ppf.pixelSize = CGSizeMake(location.x / self.view.bounds.size.width * 0.5, location.y / self.view.bounds.size.height * 0.5) unless @ppf.nil?
+    case @mode
+    when :ppf
+      @filter.pixelSize = CGSizeMake(location.x / self.view.bounds.size.width * 0.5, location.y / self.view.bounds.size.height * 0.5)
+    end
   end
 
   def touchesMoved(touches, withEvent:event)
     location = touches.anyObject.locationInView(self.view)
-    @ppf.pixelSize = CGSizeMake(location.x / self.view.bounds.size.width * 0.5, location.y / self.view.bounds.size.height * 0.5) unless @ppf.nil?
+    case @mode
+    when :ppf
+      @filter.pixelSize = CGSizeMake(location.x / self.view.bounds.size.width * 0.5, location.y / self.view.bounds.size.height * 0.5)
+    end
   end
 
   def shouldAutorotateToInterfaceOrientation(interfaceOrientation)
@@ -47,7 +56,7 @@ class JGViewController < UIViewController
       end
       rotate = true
     end
-    @vc.outputImageOrientation = interfaceOrientation unless !rotate or @vc.nil?
+    @camera.outputImageOrientation = interfaceOrientation unless !rotate or @camera.nil?
     rotate
   end
 end
