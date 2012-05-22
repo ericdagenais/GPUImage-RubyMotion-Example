@@ -31,19 +31,21 @@ class JGViewController < UIViewController
   end
 
   def touchesBegan(touches, withEvent:event)
-    location = touches.anyObject.locationInView(self.view)
-    case @mode
-    when :ppf
-      @filter.pixelSize = CGSizeMake(location.x / self.view.bounds.size.width * 0.5, location.y / self.view.bounds.size.height * 0.5)
-    end
+    handleTouch(touches)
   end
 
   def touchesMoved(touches, withEvent:event)
+    handleTouch(touches)
+  end
+
+  def handleTouch(touches)
     location = touches.anyObject.locationInView(self.view)
     case @mode
     when :ppf
       @filter.pixelSize = CGSizeMake(location.x / self.view.bounds.size.width * 0.5, location.y / self.view.bounds.size.height * 0.5)
-    end
+    when :crazy
+      @filter.scale = location.y / self.view.bounds.size.height * 8.0
+    end    
   end
 
   def shouldAutorotateToInterfaceOrientation(interfaceOrientation)
