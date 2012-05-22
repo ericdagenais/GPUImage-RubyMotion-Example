@@ -39,8 +39,8 @@ eos
     # @pixelSizeUniform = self.filterProgram.uniformIndex("pixelSize")
     # @centerUniform = self.filterProgram.uniformIndex("center")
     #
-    @pixelSizeUniform = self.filterProgram.uniformIndex2("pixelSize").unsignedIntValue
-    @centerUniform = self.filterProgram.uniformIndex2("center").unsignedIntValue
+    @pixelSizeUniform = self.filterProgram.uniformIndex2("pixelSize")
+    @centerUniform = self.filterProgram.uniformIndex2("center")
 
     @pixelSizeData = FloatData.new([0.0,0.0])
     @centerData = FloatData.new([0.0,0.0])
