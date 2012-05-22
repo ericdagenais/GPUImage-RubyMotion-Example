@@ -91,11 +91,11 @@ class JGViewController < UIViewController
     if UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone
       rotate = interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown
     else
-      case interfaceOrientation
-      when UIInterfaceOrientationLandscapeRight
-        interfaceOrientation = UIInterfaceOrientationLandscapeLeft
-      end
       rotate = true
+    end
+    case interfaceOrientation
+    when UIInterfaceOrientationLandscapeRight
+      interfaceOrientation = UIInterfaceOrientationLandscapeLeft
     end
     @camera.outputImageOrientation = interfaceOrientation unless !rotate or @camera.nil?
     rotate
