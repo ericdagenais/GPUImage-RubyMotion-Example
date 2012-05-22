@@ -105,9 +105,6 @@ eos
     self
   end
 
-  def pixelSize=(s)
-  end
-
   def scale=(s)
     @scale = s
     GPUImageOpenGLESContext.useImageProcessingContext
@@ -127,17 +124,5 @@ eos
     GPUImageOpenGLESContext.useImageProcessingContext
     self.filterProgram.use
     glUniform4f(@colorFinishUniform, @colorFinish.one, @colorFinish.two, @colorFinish.three, @colorFinish.four)
-  end
-
-  def scale
-    @scale
-  end
-
-  def colorStart
-    @colorStart
-  end
-
-  def colorFinish
-    @colorFinish
   end
 end

@@ -66,12 +66,4 @@ eos
     @centerData.set_data([@center.x, @center.y])
     glUniform2fv(@centerUniform, 1, @centerData.ptr)
   end
-
-  def pixelSize
-    @pixelSize
-  end
-
-  def center
-    @center
-  end
 end
