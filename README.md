@@ -2,7 +2,7 @@
 
 An example to demonstrate the use of [GPUImage][GI] with [RubyMotion][RM]. This is based on the examples from the Indie Ambitions blog articles [Learning OpenGL with GPUImage][IA] and [Perlin Noise on GPU in GPUImage][IA2].
 
-This needs to be run on a physical iPhone or iPad device with a camera to see the results. Running it in the simulator simply results in a black screen. [This video][VI] shows the effect of the image filter. See the blog article for more details. Swipe the screen left or right to change the current filter. Touch the screen to change the filter parameters.
+This needs to be run on a physical iPhone or iPad device with a camera to see the results. Running it in the simulator simply results in a black screen. [This video][VI] shows the effect of one of the image filters. See the blog articles for more details. Swipe the screen left or right to change the current filter. Touch the screen to change the filter parameters.
 
 ### Quickstart
 
