@@ -16,16 +16,17 @@ This needs to be run on a physical iPhone or iPad device with a camera to see th
 
 ### Dependencies
 
-* XCode 4.x w/ iOS SDK
+* XCode 4.x w/ iOS SDK 5.x
 * RubyMotion
 
 ### Caveats
 
-It seems that with the latest version of RubyMotion available at this time (v1.4), 2 small modifications need to be made to the GPUImage Objective-C sources to make the example work. The patch file is included (GPUImage_patch.diff) and can be applied with the "rake patch" task in the above instructions
+It seems that with the latest version of RubyMotion available at this time (v1.5), 2 small modifications need to be made to the GPUImage Objective-C sources to make the example work. The patch file is included (GPUImage_patch.diff) and can be applied with the "rake patch" task in the above instructions
 
-#### RubyMotion v1.4 Limitations
+#### RubyMotion v1.5 Limitations
 
 * Protected Objective-C instance variables in a base class cannot be accessed from Ruby classes that derive from that class
+
 * Certain Objective-C methods in vendor libraries cannot be called. For example, I could not call a public method that returned type "GLuint". Changing the return type to "unsigned int" did not help either. However, returning an object "NSNumber *" did allow me to successfully call the method from Ruby
 
 2012-05-21: I was informed by Laurent that the 2nd issue would be fixed. He mentioned that he'll also think about the best way to expose Objective-C ivars in Ruby as the issue is a limitation of the RubyMotion/MacRuby runtime
@@ -70,8 +71,8 @@ The original Objective-C code was:
 
 The following code in gpu_image_polar_pixellate_posterize_filter.rb works correctly with the workarounds in place:
 
-        @pixelSizeUniform = self.filterProgram.uniformIndex2("pixelSize").unsignedIntValue
-        @centerUniform = self.filterProgram.uniformIndex2("center").unsignedIntValue
+        @pixelSizeUniform = self.filterProgram.uniformIndex2("pixelSize")
+        @centerUniform = self.filterProgram.uniformIndex2("center")
 
 
 [GI]: https://github.com/BradLarson/GPUImage
