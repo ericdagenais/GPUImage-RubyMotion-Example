@@ -79,6 +79,8 @@ class JGViewController < UIViewController
     case @modes[@mode]
     when :ppf
       @filter.pixelSize = CGSizeMake(location.x / self.view.bounds.size.width * 0.5, location.y / self.view.bounds.size.height * 0.5)
+    when :perlin
+      @perlin.scale = location.y / self.view.bounds.size.height * 16.0
     when :crazy
       @filter.scale = location.y / self.view.bounds.size.height * 8.0
     end    
