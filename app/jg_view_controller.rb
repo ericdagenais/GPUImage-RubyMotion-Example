@@ -23,9 +23,11 @@ class JGViewController < UIViewController
 
   def shouldAutorotateToInterfaceOrientation(interfaceOrientation)
     if UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone
-      interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown
+      rotate = interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown
     else
-      true
+      rotate = true
     end
+    @vc.outputImageOrientation = interfaceOrientation unless !rotate or @vc.nil?
+    rotate
   end
 end
