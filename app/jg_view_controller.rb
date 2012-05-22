@@ -25,24 +25,24 @@ class JGViewController < UIViewController
     when :ppf
       if @ppf.nil?
         @ppf = GPUImagePolarPixellatePosterizeFilter.alloc.init
-        @camera.addTarget(@ppf)
       end
+      @camera.addTarget(@ppf)
       @filter = @ppf
     when :perlin
       if @blend.nil?
         @blend = GPUImageAlphaBlendFilter.alloc.init
         @perlin = GPUImagePerlinNoiseFilter.alloc.init
-        @camera.addTarget(@blend)
-        @camera.addTarget(@perlin)
         @perlin.addTarget(@blend)
         @blend.mix = 0.5
       end
+      @camera.addTarget(@blend)
+      @camera.addTarget(@perlin)
       @filter = @blend
     when :crazy
       if @crazy.nil?
         @crazy = GPUImagePixellateCrazyFilter.alloc.init
-        @camera.addTarget(@crazy)
       end
+      @camera.addTarget(@crazy)
       @filter = @crazy
     else
       NSLog("Invalid filter")
@@ -51,6 +51,7 @@ class JGViewController < UIViewController
   end
 
   def tearDown
+    @camera.removeAllTargets
     @filter.removeAllTargets
   end
 
