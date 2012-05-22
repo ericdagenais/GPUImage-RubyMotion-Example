@@ -1,8 +1,8 @@
-# A GPUImage RubyMotion Example
+# A GPUImage RubyMotion iOS Example
 
-An example to demonstrate the use of [GPUImage][GI] with [RubyMotion][RM]. This is based on the example from the Indie Ambitions blog article [Learning OpenGL with GPUImage][IA].
+An example to demonstrate the use of [GPUImage][GI] with [RubyMotion][RM]. This is based on the examples from the Indie Ambitions blog articles [Learning OpenGL with GPUImage][IA] and [Perlin Noise on GPU in GPUImage][IA2].
 
-This needs to be run on a physical iPhone device with a camera to see the results. Running it in the simulator simply results in a black screen. [This video][VI] shows the effect of the image filter. See the blog article for more details.
+This needs to be run on a physical iPhone or iPad device with a camera to see the results. Running it in the simulator simply results in a black screen. [This video][VI] shows the effect of the image filter. See the blog article for more details. Swipe the screen left or right to change the current filter. Touch the screen to change the filter parameters.
 
 ### Quickstart
 
@@ -13,6 +13,11 @@ This needs to be run on a physical iPhone device with a camera to see the result
         rake                  # build and run in simulator to check for errors/exceptions
         vim Rakefile          # edit app.codesign_certificate
         rake device           # deploy to iPhone/iPad
+
+### Dependencies
+
+* XCode 4.x w/ iOS SDK
+* RubyMotion
 
 ### Caveats
 
@@ -63,4 +68,5 @@ The following code in gpu_image_polar_pixellate_posterize_filter.rb works correc
 [GI]: https://github.com/BradLarson/GPUImage
 [RM]: http://www.rubymotion.com/
 [IA]: http://indieambitions.com/idevblogaday/learning-opengl-gpuimage/
+[IA2]: http://indieambitions.com/idevblogaday/perlin-noise-gpu-gpuimage/
 [VI]: http://www.youtube.com/watch?v=cThYM20wj_M
