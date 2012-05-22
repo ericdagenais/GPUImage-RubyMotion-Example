@@ -1,24 +1,40 @@
 class JGViewController < UIViewController
+  def loadView
+    @v = GPUImageView.alloc.init
+    self.view = @v
+    @mode = :ppf
+    #@mode = :perlin
+  end
+
   def viewDidLoad
     super
     @vc = GPUImageVideoCamera.alloc.initWithSessionPreset(AVCaptureSessionPreset640x480, cameraPosition:AVCaptureDevicePositionBack)
     @vc.outputImageOrientation = UIInterfaceOrientationPortrait
-    @ppf = GPUImagePolarPixellatePosterizeFilter.alloc.init
-    @vc.addTarget(@ppf)
-    v = GPUImageView.alloc.init
-    @ppf.addTarget(v)
-    self.view = v
+    case @mode
+    when :ppf
+      @ppf = GPUImagePolarPixellatePosterizeFilter.alloc.init
+      @vc.addTarget(@ppf)
+      @ppf.addTarget(@v)
+    when :perlin
+      @bf = GPUImageAlphaBlendFilter.alloc.init
+      @pn = GPUImagePerlinNoiseFilter.alloc.init
+      @vc.addTarget(@bf)
+      @vc.addTarget(@pn)
+      @pn.addTarget(@bf)
+      @bf.mix = 0.5
+      @bf.addTarget(@v)
+    end
     @vc.startCameraCapture
   end
 
   def touchesBegan(touches, withEvent:event)
     location = touches.anyObject.locationInView(self.view)
-    @ppf.pixelSize = CGSizeMake(location.x / self.view.bounds.size.width * 0.5, location.y / self.view.bounds.size.height * 0.5)
+    @ppf.pixelSize = CGSizeMake(location.x / self.view.bounds.size.width * 0.5, location.y / self.view.bounds.size.height * 0.5) unless @ppf.nil?
   end
 
   def touchesMoved(touches, withEvent:event)
     location = touches.anyObject.locationInView(self.view)
-    @ppf.pixelSize = CGSizeMake(location.x / self.view.bounds.size.width * 0.5, location.y / self.view.bounds.size.height * 0.5)
+    @ppf.pixelSize = CGSizeMake(location.x / self.view.bounds.size.width * 0.5, location.y / self.view.bounds.size.height * 0.5) unless @ppf.nil?
   end
 
   def shouldAutorotateToInterfaceOrientation(interfaceOrientation)
