@@ -8,11 +8,10 @@ This needs to be run on a physical iPhone or iPad device with a camera to see th
 
         git clone https://github.com/ericdagenais/GPUImage-RubyMotion-Example.git
         cd GPUImage-RubyMotion-Example
-        git submodule init    # init vendor/GPUImage submodule
-        git submodule update  # fetch vendor/GPUImage submodule
-        rake                  # build and run in simulator to check for errors/exceptions
-        vim Rakefile          # edit app.codesign_certificate
-        rake device           # deploy to iPhone/iPad
+        git submodule update --init  # fetch vendor/GPUImage submodule
+        rake                         # build and run in simulator to check for errors/exceptions
+        vim Rakefile                 # edit app.codesign_certificate
+        rake device                  # deploy to iPhone/iPad
 
 ### Dependencies
 
