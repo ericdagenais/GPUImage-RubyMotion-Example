@@ -5,6 +5,8 @@ Motion::Project::App.setup do |app|
   app.name = 'GPUImage'
   app.device_family = [:iphone, :ipad]
 
+  app.deployment_target = '5.1'
+  
   app.vendor_project('vendor/GPUImage/framework', :xcode,
       :target => 'GPUImage',
       :headers_dir => 'Source')
