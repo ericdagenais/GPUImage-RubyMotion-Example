@@ -1,4 +1,5 @@
 $:.unshift("/Library/RubyMotion/lib")
+require 'rubygems'
 require 'motion/project'
 
 Motion::Project::App.setup do |app|
